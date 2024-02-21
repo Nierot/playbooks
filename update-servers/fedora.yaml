@@ -4,6 +4,7 @@
  
   - name: upgrade all packages
     yum: name='*' state=latest
+    become: yes
     become_user: root
 
   - name: check for reboot hint
