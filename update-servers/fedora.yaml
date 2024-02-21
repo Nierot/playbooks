@@ -1,7 +1,6 @@
 - name: Update alle fedora systemen
   hosts: fedora
-  become: true
-  become_user: root
+  user: root
   tasks:
     - name: Ping
       ansible.builtin.ping:
