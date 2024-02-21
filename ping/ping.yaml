@@ -1,7 +1,7 @@
 - name: Update all debian/ubuntu systems
   tasks:
     - name: Ping
-      hosts: all:~unraid
+      hosts: all:!unraid
       ansible.builtin.ping:
     - name: Ping unraid
       hosts: unraid
