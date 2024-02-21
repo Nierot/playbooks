@@ -1,11 +1,10 @@
 - name: Update alle fedora systemen
   hosts: fedora
-  become: true
-  become_user: root
   tasks:
  
   - name: upgrade all packages
     yum: name='*' state=latest
+    become_user: root
 
   - name: check for reboot hint
     shell: if [ $(rpm -q --last kernel | awk 'NR==1 {print $1}') != kernel-$(uname -r) ]; then echo 'reboot'; else echo 'Kernel is current'; fi
