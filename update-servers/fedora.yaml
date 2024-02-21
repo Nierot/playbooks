@@ -21,7 +21,3 @@
     ignore_errors: true
     changed_when: "reboot_hint.stdout == 'reboot'"
     register: rebooting
-
-  - name: Wait for computer to reboot...
-    pause: seconds=60
-    when: rebooting|changed
