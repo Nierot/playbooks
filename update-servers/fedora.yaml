@@ -1,11 +1,10 @@
 - name: Update alle fedora systemen
   hosts: fedora
-  user: root
   tasks:
     - name: Ping
       ansible.builtin.ping:
     - name: Update all packages
-      raw: /usr/bin/dnf -y upgrade
+      raw: sudo /usr/bin/dnf -y upgrade
     - name: Check if a reboot is needed
       register: reboot_required_file
       stat: path=/var/run/reboot-required get_md5=no
