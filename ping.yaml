@@ -1,0 +1,5 @@
+- name: Update all debian/ubuntu systems
+  hosts: all
+  tasks:
+    - name: Ping
+      ansible.builtin.ping:
