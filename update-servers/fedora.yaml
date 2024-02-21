@@ -14,6 +14,7 @@
     register: reboot_hint
 
   - name: Rebooting ...
+      become: true
     command: shutdown -r now "Reboot required for updated kernel"
     async: 0
     poll: 0
