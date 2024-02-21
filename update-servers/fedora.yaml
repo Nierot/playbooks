@@ -1,5 +1,6 @@
 - name: Update alle fedora systemen
   hosts: fedora
+  become_method: sudo
   tasks:
  
   - name: upgrade all packages
