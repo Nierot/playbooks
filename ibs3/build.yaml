@@ -59,6 +59,7 @@
       docker_image:
         name: ibs3
         repository: "{{ registry_url }}/ibs3"
+        force_tag: true
         tag: latest
         push: true
         source: local
