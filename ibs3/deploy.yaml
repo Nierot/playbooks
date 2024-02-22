@@ -19,6 +19,5 @@
         url: "{{ caddy_url }}{{ caddy_1 }}{{ ibs3_server_id }}{{ caddy_2 }}"
         method: "POST"
         body_format: json
-        body:
-          dial: "{{ ibs3_maintenance_url }}"
+        body: "{ \"dial\": {{ ibs3_maintenance_url }} }"
         status_code: 200
