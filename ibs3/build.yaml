@@ -24,20 +24,20 @@
         single_branch: yes
         version: "{{ branch }}"
 
-    # - name: NPM install
-    #   community.general.npm:
-    #     path: "{{ build_path }}"
-    #     ci: true
+    - name: NPM install
+      community.general.npm:
+        path: "{{ build_path }}"
+        ci: true
 
-    # - name: Run build script
-    #   command:
-    #     chdir: "{{ build_path }}"
-    #     cmd: npm run build
-    #   environment:
-    #     # De build heeft toegang nodig tot een werkende database (...?)
-    #     # De bug zit ergens in de form generator oef
-    #     # Deze komt uit semaphore
-    #     DATABASE_URL: "{{ DATABASE_URL }}"
+    - name: Run build script
+      command:
+        chdir: "{{ build_path }}"
+        cmd: npm run build
+      environment:
+        # De build heeft toegang nodig tot een werkende database (...?)
+        # De bug zit ergens in de form generator oef
+        # Deze komt uit semaphore
+        DATABASE_URL: "{{ DATABASE_URL }}"
 
     - name: Build docker image
       docker_image:
