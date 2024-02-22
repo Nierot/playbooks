@@ -23,4 +23,5 @@
         body_format: json
         body: "{ \"dial\": \"{{ ibs3_maintenance_url }}\" }"
         status_code: 200
+        timeout: 10
     
