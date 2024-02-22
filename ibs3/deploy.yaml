@@ -16,6 +16,7 @@
     - name: debug
       debug:
         msg: "{{ caddy_url }}{{ caddy_1 }}{{ ibs3_server_id }}{{ caddy_2 }}"
+
     - name: Maintenance mode
       ansible.builtin.uri:
         url: "{{ caddy_url }}{{ caddy_1 }}{{ ibs3_server_id }}{{ caddy_2 }}"
@@ -24,7 +25,7 @@
         body: "{ \"dial\": \"{{ ibs3_maintenance_url }}\" }"
         status_code: 200
         timeout: 10
-      register: response
-      changed_when: response.status == 200
-      until: response
-      delay: 10
+        
+    - name: debug
+      debug:
+        msg: "{{ caddy_url }}{{ caddy_1 }}{{ ibs3_server_id }}{{ caddy_2 }}"
