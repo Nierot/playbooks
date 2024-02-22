@@ -41,7 +41,7 @@
 
     - name: Build docker image
       docker_image:
-        name: "localhost:5000/ibs3"
+        name: "ibs3:{{ version }}"
         build:
           dockerfile: "new.Dockerfile"
           path: "{{ build_path }}"
@@ -49,9 +49,9 @@
 
     - name: Push to local registry
       docker_image:
-        name: "{{ registry_url }}/ibs3"
+        name: ibs3
+        repository: "{{ registry_url }}/ibs3"
         tag: "{{ version }}"
-        repository: "{{ registry_url }}"
         push: true
         source: local
 
