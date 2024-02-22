@@ -6,7 +6,7 @@
   hosts: build
   become: true
   vars: 
-    NODEJS_VERSION: "18.14.0"
+    NODEJS_VERSION: "18"
   tasks:
     - name: Install aptitude
       apt:
