@@ -41,7 +41,7 @@
 
     - name: Build docker image
       docker_image:
-        name: "{{ registry_url }}/ibs3:test"
+        name: "{{ registry_url }}/ibs3"
         build:
           dockerfile: "new.Dockerfile"
           path: "{{ build_path }}"
