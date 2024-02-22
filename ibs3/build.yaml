@@ -25,11 +25,9 @@
         single_branch: yes
         version: "{{ BRANCH }}"
 
-    - name: Change directory
-      command: "chdir={{ BUILD_PATH }}"
-
     - name: NPM install
       community.general.npm:
+        path: "{{ BUILD_PATH }}"
         ci: true
 
     # - name: Run build script
