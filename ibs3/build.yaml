@@ -3,18 +3,26 @@
 # Docker container
 # Push naar registry
 # Discord notification
+# remove build files
 - name: Build ibs3 container
   hosts: build
   vars:
     REPOSITORY_NAME: "ibs3"
     BRANCH: "main"
     REPOSITORY_LINK: "https://github.com/ODDInvictus/ibs3"
+    BUILD_PATH: "~/build/ibs3/main"
   tasks:
     - name: Create build directory
       file:
-        path: "~/build/{{ REPOSITORY_NAME }}/{{ BRANCH }}"
+        path: "{{ BUILD_PATH }}"
         state: directory
         mode: '0755'
 
-    # - name: Clone git repository
+    - name: Clone git repository
+      ansible.builtin.git:
+        repo: "{{ REPOSITORY_LINK }}"
+        dest: "{{ BUILD_PATH }}"
+        single_branch: yes
+        version: "{{ BRANCH }}"
+
 
