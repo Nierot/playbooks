@@ -29,21 +29,31 @@
     #     path: "{{ build_path }}"
     #     ci: true
 
-    - name: Run build script
-      command:
-        chdir: "{{ build_path }}"
-        cmd: npm run build
-      environment:
-        # De build heeft toegang nodig tot een werkende database (...?)
-        # De bug zit ergens in de form generator oef
-        # Deze komt uit semaphore
-        DATABASE_URL: "{{ DATABASE_URL }}"
+    # - name: Run build script
+    #   command:
+    #     chdir: "{{ build_path }}"
+    #     cmd: npm run build
+    #   environment:
+    #     # De build heeft toegang nodig tot een werkende database (...?)
+    #     # De bug zit ergens in de form generator oef
+    #     # Deze komt uit semaphore
+    #     DATABASE_URL: "{{ DATABASE_URL }}"
 
     - name: Build docker image
       docker_image:
-        name: ibs3:test1
+        name: "{{ registry_url }}/ibs3"
+        tag: "{{ version }}"
         build:
           dockerfile: "new.Dockerfile"
           path: "{{ build_path }}"
         source: build
 
+    - name: Push to local registry
+      docker_image:
+        name: "{{ registry_url }}/ibs3"
+        tag: "{{ version }}"
+        repository: "{{ registry_url }}"
+        push: true
+        source: local
+
+    # if release version, then also push to ghcr
