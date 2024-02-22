@@ -13,6 +13,9 @@
     caddy_1: "/config/apps/http/servers/srv0/routes/"
     caddy_2: "/handle/0/routes/0/handle/0/upstreams/0"
   tasks:
+    - name: debug
+      debug:
+        msg: "{{ caddy_url }}{{ caddy_1 }}{{ ibs3_server_id }}{{ caddy_2 }}"
     - name: Maintenance mode
       ansible.builtin.uri:
         url: "{{ caddy_url }}{{ caddy_1 }}{{ ibs3_server_id }}{{ caddy_2 }}"
@@ -20,3 +23,4 @@
         body_format: json
         body: "{ \"dial\": \"{{ ibs3_maintenance_url }}\" }"
         status_code: 200
+    
