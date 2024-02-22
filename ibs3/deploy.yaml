@@ -7,3 +7,16 @@
 # geen errors? Dan maintenance mode eraf
 # anders, backup terugzetten
 # oude container terugzetten
+- name: Deploy ibs3
+  hosts: build
+  vars:
+    caddy_1: "/config/apps/http/servers/srv0/routes/"
+    caddy_2: "/handle/0/routes/0/handle/0/upstreams/0"
+  tasks:
+    - name: Maintenance mode
+      ansible.builtin.uri:
+        url: "{{ caddy_url }}{{ caddy_1 }}{{ ibs3_server_id }}{{ caddy_2 }}"
+        method: "POST"
+        body_format: application/json
+        body:
+          dial: "{{ ibs3_maintenance_url }}"
