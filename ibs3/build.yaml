@@ -25,11 +25,12 @@
         single_branch: yes
         version: "{{ BRANCH }}"
 
-    - name: NPM install
-      community.general.npm:
-        path: "{{ BUILD_PATH }}"
-        ci: true
+    # - name: NPM install
+    #   community.general.npm:
+    #     path: "{{ BUILD_PATH }}"
+    #     ci: true
 
     - name: Run build script
-      command: npm run build
-
+      command:
+        chdir: "{{ BUILD_PATH }}"
+        cmd: npm run build
