@@ -45,6 +45,5 @@
         build:
           dockerfile: "new.Dockerfile"
           path: "{{ build_path }}"
-          source: build
-        state: present
+        source: build
 
