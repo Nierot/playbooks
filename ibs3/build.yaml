@@ -36,5 +36,15 @@
       environment:
         # De build heeft toegang nodig tot een werkende database (...?)
         # De bug zit ergens in de form generator oef
-        # Deze komt uit semaphores
+        # Deze komt uit semaphore
         DATABASE_URL: "{{ DATABASE_URL }}"
+
+    - name: Build docker image
+      docker_image:
+        name: ibs3:test1
+        build:
+          dockerfile: "new.Dockerfile"
+          path: "{{ build_path }}"
+          source: build
+        state: present
+
