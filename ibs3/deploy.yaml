@@ -1,0 +1,9 @@
+# Maintenance mode
+# Oude ibs3 container afsluiten
+# Backup database
+# Run migrations
+# Run data-migrations
+# Nieuwe container deployen
+# geen errors? Dan maintenance mode eraf
+# anders, backup terugzetten
+# oude container terugzetten
