@@ -58,9 +58,8 @@
     - name: Push as latest
       docker_image:
         name: ibs3
-        repository: "{{ registry_url }}/ibs3"
+        repository: "{{ registry_url }}/ibs3:latest"
         force_tag: true
-        tag: latest
         push: true
         source: local
 
