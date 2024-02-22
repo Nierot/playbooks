@@ -1,5 +1,7 @@
 # Alle dependencies voor het bouwen van ibs3
 # Gebaseerd op https://www.digitalocean.com/community/tutorials/how-to-use-ansible-to-install-and-set-up-docker-on-ubuntu-20-04
+# en https://stackoverflow.com/questions/45840664/installing-nodejs-lts-for-ansible
+# Deze server draait Ubuntu 22.04
 - name: Install dependencies for building ibs3
   hosts: build
   become: true
