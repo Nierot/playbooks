@@ -60,6 +60,7 @@
         name: ibs3
         repository: "{{ registry_url }}/ibs3:latest"
         force_tag: true
+        force: true
         push: true
         source: local
 
