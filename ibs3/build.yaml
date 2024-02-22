@@ -41,8 +41,7 @@
 
     - name: Build docker image
       docker_image:
-        name: "{{ registry_url }}/ibs3"
-        tag: "{{ version }}"
+        name: "{{ registry_url }}/ibs3:{{ version }}"
         build:
           dockerfile: "new.Dockerfile"
           path: "{{ build_path }}"
