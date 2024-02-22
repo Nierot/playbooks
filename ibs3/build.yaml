@@ -30,6 +30,6 @@
         path: "{{ BUILD_PATH }}"
         ci: true
 
-    # - name: Run build script
-      # community.general.npm:
+    - name: Run build script
+      command: npm run build
 
