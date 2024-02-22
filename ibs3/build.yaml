@@ -12,7 +12,7 @@
   tasks:
     - name: Create build directory
       file:
-        path: "~/build/{{ REPOSITORY_NAME }}"/{{ BRANCH }}
+        path: "~/build/{{ REPOSITORY_NAME }}/{{ BRANCH }}"
         state: directory
         mode: '0755'
 
