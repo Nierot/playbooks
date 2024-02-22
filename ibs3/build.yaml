@@ -34,5 +34,7 @@
         chdir: "{{ build_path }}"
         cmd: npm run build
       environment:
-        # This is set in semaphore
+        # De build heeft toegang nodig tot een werkende database (...?)
+        # De bug zit ergens in de form generator oef
+        # Deze komt uit semaphores
         DATABASE_URL: "{{ DATABASE_URL }}"
