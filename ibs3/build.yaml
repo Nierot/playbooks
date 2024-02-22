@@ -1,0 +1,20 @@
+# Clone repository
+# Run build script
+# Docker container
+# Push naar registry
+# Discord notification
+- name: Build ibs3 container
+  hosts: build
+  vars:
+    REPOSITORY_NAME: "ibs3"
+    BRANCH: "main"
+    REPOSITORY_LINK: "https://github.com/ODDInvictus/ibs3"
+  tasks:
+    - name: Create build directory
+      file:
+        path: "~/build/{{ REPOSITORY_NAME }}"/{{ BRANCH }}
+        state: directory
+        mode: '0755'
+
+    # - name: Clone git repository
+
