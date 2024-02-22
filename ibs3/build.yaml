@@ -7,30 +7,32 @@
 - name: Build ibs3 container
   hosts: build
   vars:
-    REPOSITORY_NAME: "ibs3"
-    BRANCH: "main"
-    REPOSITORY_LINK: "https://github.com/ODDInvictus/ibs3"
-    BUILD_PATH: "~/build/ibs3/main"
+    branch: "main"
+    repository_link: "https://github.com/ODDInvictus/ibs3"
+    build_path: "~/build/ibs3/main"
   tasks:
     - name: Create build directory
       file:
-        path: "{{ BUILD_PATH }}"
+        path: "{{ build_path }}"
         state: directory
         mode: '0755'
 
     - name: Clone git repository
       ansible.builtin.git:
-        repo: "{{ REPOSITORY_LINK }}"
-        dest: "{{ BUILD_PATH }}"
+        repo: "{{ repository_link }}"
+        dest: "{{ build_path }}"
         single_branch: yes
-        version: "{{ BRANCH }}"
+        version: "{{ branch }}"
 
     # - name: NPM install
     #   community.general.npm:
-    #     path: "{{ BUILD_PATH }}"
+    #     path: "{{ build_path }}"
     #     ci: true
 
     - name: Run build script
       command:
-        chdir: "{{ BUILD_PATH }}"
+        chdir: "{{ build_path }}"
         cmd: npm run build
+      environment:
+        # This is set in semaphore
+        DATABASE_URL: "{{ DATABASE_URL }}"
