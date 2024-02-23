@@ -8,13 +8,20 @@
 # anders, backup terugzetten
 # oude container terugzetten
 - name: Deploy ibs3
-  hosts: build
+  hosts: all
+  # Dit is nodig want anders blijft maintenance mode vast hangen
+  # Heb geprobeerd met uri, curl en dit en allemaal hetzelfde
   gather_facts: false
   vars:
     caddy_1: "/config/apps/http/servers/srv0/routes/"
     caddy_2: "/handle/0/routes/0/handle/0/upstreams/0"
+
+    repository_link: "https://github.com/ODDInvictus/ibs3"
+    deploy_dir: "~/deploy/ibs3"
+    branch: "main"
   tasks:
     - name: maintenance mode
+      when: inventory_hostname in groups['build']
       maxhoesel.caddy.caddy_config:
         caddy_host: "{{ caddy_url }}"
         path: "/apps/http/servers/srv0/routes/{{ ibs3_server_id }}/handle/0/routes/0/handle/0/upstreams/0"
@@ -22,3 +29,46 @@
           dial: "{{ ibs3_maintenance_url }}"
         state: present
         force: true
+    
+    - name: shutdown ibs3
+      when: inventory_hostname in groups['docker']
+      docker_container:
+        name: ibs3
+        state: stopped
+      
+    - name: backup database
+      when: inventory_hostname in groups['build']
+      community.mysql.mysql_db:
+        login_host: "{{ db_host }}"
+        login_password: "{{ db_pass }}"
+        login_user: root
+        name: ibs3
+        state: dump
+        target: ~/db/ibs3/dump.sql
+
+    # To run migrations we need to clone the repository and then run prisma
+
+    - name: create deploy directory
+      when: inventory_hostname in groups['build']
+      file:
+        path: "{{ build_path }}"
+        state: directory
+        mode: '0755'
+
+    - name: Clone git repository
+      when: inventory_hostname in groups['build']
+      ansible.builtin.git:
+        repo: "{{ repository_link }}"
+        dest: "{{ build_path }}"
+        single_branch: yes
+        version: "{{ branch }}"
+
+    - name: NPM install
+      when: inventory_hostname in groups['build']
+      community.general.npm:
+        path: "{{ build_path }}"
+        ci: true
+
+    # - name: run migrations
+      # when: inventory_hostname in groups['build']
+
