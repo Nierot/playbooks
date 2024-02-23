@@ -77,10 +77,13 @@
 
     - name: Install pymysql
       apt:
-        name: python3-pymysql
+        pkg:
+          - python3-pymysql
+          - python3-dev
+          - default-libmysqlclient-dev
+          - build-essential
         state: latest
 
-    - name: Install mysql
-      apt:
+    - name: Install mysqlclient
+      pip:
         name: mysqlclient
-        state: latest
