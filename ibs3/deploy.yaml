@@ -18,14 +18,15 @@
         msg: "{{ caddy_url }}{{ caddy_1 }}{{ ibs3_server_id }}{{ caddy_2 }}"
 
     - name: Maintenance mode
-      ansible.builtin.uri:
-        url: "{{ caddy_url }}{{ caddy_1 }}{{ ibs3_server_id }}{{ caddy_2 }}"
-        method: "PATCH"
-        body_format: json
-        body: "{ \"dial\": \"{{ ibs3_maintenance_url }}\" }"
-        status_code: 200
-        timeout: 10
-        
+      shell: "curl -X PATCH -H \"Content-Type: application/json\" -d \"{ \"dial\": \"{{ ibs3_maintenance_url }}\" \" {{ caddy_url }}{{ caddy_1 }}{{ ibs3_server_id }}{{ caddy_2 }}"
+      # ansible.builtin.uri:
+        # url: "{{ caddy_url }}{{ caddy_1 }}{{ ibs3_server_id }}{{ caddy_2 }}"
+        # method: "PATCH"
+        # body_format: json
+        # body: "{ \"dial\": \"{{ ibs3_maintenance_url }}\" }"
+        # status_code: 200
+        # timeout: 10
+
     - name: debug
       debug:
         msg: "{{ caddy_url }}{{ caddy_1 }}{{ ibs3_server_id }}{{ caddy_2 }}"
