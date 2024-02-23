@@ -1,6 +1,7 @@
 - name: Music server
   hosts: music
   become: true
+  become_user: root
   roles:
     - role: xmordax.librespot
   
