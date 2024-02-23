@@ -2,9 +2,20 @@
   hosts: music
   become: true
   become_user: root
-  roles:
-    - role: xmordax.librespot
   
-  vars:
-    librespot_installation_type: "librespot-java"
-    raspotify_device_name: "Make Believe"
+  tasks:
+    - name: Install aptitude
+      apt:
+        name: aptitude
+        state: latest
+        update_cache: true
+
+    - name: Add spocon repository
+      apt_repository:
+        repo: ppa:spocon/spocon
+        state: present
+
+    - name: Install spocon
+      apt:
+        name: spocon
+        state: latest
