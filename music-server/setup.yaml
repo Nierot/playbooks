@@ -6,5 +6,5 @@
     - role: xmordax.librespot
   
   vars:
-    librespot_installation_type: "librespot"
+    librespot_installation_type: "librespot-java"
     raspotify_device_name: "Make Believe"
