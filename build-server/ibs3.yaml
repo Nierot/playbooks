@@ -80,6 +80,7 @@
         pkg:
           - python3-pymysql
           - python3-dev
+          - pkg-config
           - default-libmysqlclient-dev
           - build-essential
         state: latest
