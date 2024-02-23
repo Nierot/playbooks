@@ -32,7 +32,7 @@
     
     - name: shutdown ibs3
       when: inventory_hostname in groups['docker']
-      user: root
+      become: true
       docker_container:
         name: ibs3
         state: stopped
