@@ -20,5 +20,4 @@
         content:
           dial: "{{ ibs3_maintenance_url }}"
         state: present
-        async: 5
-        poll: 5
+        force: true
