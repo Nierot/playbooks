@@ -17,8 +17,16 @@
       debug:
         msg: "{{ caddy_url }}{{ caddy_1 }}{{ ibs3_server_id }}{{ caddy_2 }} {{ ibs3_maintenance_url }}"
 
-    - name: Maintenance mode
-      shell: "curl -X PATCH -H \"Content-Type: application/json\" -d \"{ \\\"dial\\\": \\\"{{ ibs3_maintenance_url }}\\\" }\" -i {{ caddy_url }}{{ caddy_1 }}{{ ibs3_server_id }}{{ caddy_2 }}"
+    - name: maintenance mode
+      maxhoesel.caddy.caddy_config:
+        caddy_host: "{{ caddy_url }}"
+        path: "/config/apps/http/servers/srv0/routes/{{ ibs3_server_id }}/handle/0/routes/0/handle/0/upstreams/0"
+        content:
+          dial: "{{ ibs3_maintenance_url }}"
+        state: present
+          
+    # - name: Maintenance mode
+      # shell: "curl -X PATCH -H \"Content-Type: application/json\" -d \"{ \\\"dial\\\": \\\"{{ ibs3_maintenance_url }}\\\" }\" -i {{ caddy_url }}{{ caddy_1 }}{{ ibs3_server_id }}{{ caddy_2 }}"
       # ansible.builtin.uri:
         # url: "{{ caddy_url }}{{ caddy_1 }}{{ ibs3_server_id }}{{ caddy_2 }}"
         # method: "PATCH"
