@@ -77,7 +77,7 @@
 
     - name: Install pymysql
       apt:
-        name: python-pymysql
+        name: python3-pymysql
         state: latest
 
     - name: Install mysql
