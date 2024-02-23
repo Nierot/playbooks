@@ -18,7 +18,7 @@
         msg: "{{ caddy_url }}{{ caddy_1 }}{{ ibs3_server_id }}{{ caddy_2 }} {{ ibs3_maintenance_url }}"
 
     - name: Maintenance mode
-      shell: "curl -X PATCH -H \"Content-Type: application/json\" -d \"{ \"dial\": \"{{ ibs3_maintenance_url }}\" \" {{ caddy_url }}{{ caddy_1 }}{{ ibs3_server_id }}{{ caddy_2 }}"
+      shell: "curl -X PATCH -H \"Content-Type: application/json\" -d \"{ \"dial\": \"{{ ibs3_maintenance_url }}\" }\" -i {{ caddy_url }}{{ caddy_1 }}{{ ibs3_server_id }}{{ caddy_2 }}"
       # ansible.builtin.uri:
         # url: "{{ caddy_url }}{{ caddy_1 }}{{ ibs3_server_id }}{{ caddy_2 }}"
         # method: "PATCH"
