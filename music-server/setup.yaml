@@ -1,4 +1,9 @@
 - name: Music server
   hosts: music
+  become: true
   roles:
     - role: xmordax.librespot
+  
+  vars:
+    librespot_installation_type: "librespot"
+    raspotify_device_name: "Make Believe"
