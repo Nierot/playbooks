@@ -74,3 +74,13 @@
       apt:
         name: nodejs
         state: latest
+
+    - name: Install pymysql
+      apt:
+        name: python-pymysql
+        state: latest
+
+    - name: Install mysql
+      apt:
+        name: mysqlclient
+        state: latest
