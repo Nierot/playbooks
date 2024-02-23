@@ -1,0 +1,4 @@
+- name: Music server
+  hosts: music
+  roles:
+    - role: xmordax.librespot
